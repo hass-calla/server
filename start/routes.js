@@ -19,6 +19,13 @@ const Route = use('Route');
 Route.group('api', () => {
   Route.get('icons', 'IconsController.all');
   Route.get('components', 'ComponentsController.all');
-}).prefix('api/v1');
 
-Route.any('*', 'SpaController.index');
+  //Boards
+  Route.get('boards', 'BoardsController.all')
+  Route.post('board', 'BoardsController.create')
+  Route.patch('board/:id', 'BoardsController.update')
+
+}).prefix('api/v1')
+  .middleware('guest');
+
+Route.any('*', 'SpaController.index').middleware('guest');
