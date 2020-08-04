@@ -6,9 +6,11 @@ const Board = use('App/Models/Board');
 class ComponentsController {
 
   async all() {
-    return (await Board.all())
-      .rows
-      .map(b => b.toJSON());
+    return (await Board.query()
+                       .withCount('pages as pages_count')
+                       .withCount('groups as groups_count')
+                       .withCount('tiles as tiles_count')
+                       .fetch()).rows.map(b => b.toJSON());
   }
 
   async create() {

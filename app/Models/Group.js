@@ -7,6 +7,7 @@ class Group extends Model {
 
   static boot() {
     super.boot();
+    Group.addTrait('JsonCast');
     Group.addHook('beforeCreate', 'UuidHook.uuid');
   }
 
@@ -16,6 +17,14 @@ class Group extends Model {
 
   static get incrementing() {
     return false;
+  }
+
+  getMeta(value) {
+    return Group.getJSON(value);
+  }
+
+  setMeta(value) {
+    return Group.setJSON(value);
   }
 
   tiles () {

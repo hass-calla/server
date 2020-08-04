@@ -25,6 +25,9 @@ Route.group('api', () => {
   Route.post('board', 'BoardsController.create')
   Route.patch('board/:id', 'BoardsController.update')
 
+  //Pages
+  Route.get('pages', 'PagesController.all')
+
 }).prefix('api/v1')
   .middleware('guest');
 

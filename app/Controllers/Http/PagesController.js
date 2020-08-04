@@ -3,8 +3,8 @@ const components = require('../../Components');
 
 class ComponentsController {
 
-  async all(boardId) {
-
+  async all({request}) {
+    return [];
   }
 
   async create(boardId) {

@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const Model = use('Model');
 
 class Board extends Model {
 
@@ -19,45 +19,52 @@ class Board extends Model {
     return false;
   }
 
-  static get jsonColumns() {
-    return [
-      'fully',
-      'background',
-      'meta'
-    ];
+  getFully(value) {
+    return Board.getJSON(value);
   }
 
-  pages () {
-    return this.hasMany('App/Models/Page')
+  setFully(value) {
+    return Board.setJSON(value);
   }
 
-  getFully(data) {
-    if(typeof data === 'string') {
-      return JSON.parse(data);
-    }
-
-    return data;
+  getBackground(value) {
+    return Board.getJSON(value);
   }
 
-  setFully(data) {
-    if(typeof data === 'object') {
-      return JSON.stringify(data);
-    }
-
-    return data;
+  setBackground(value) {
+    return Board.setJSON(value);
   }
 
-  getBackground(data) {
-    if(typeof data === 'string') {
-      return JSON.parse(data);
-    }
-
-    return data;
+  getMeta(value) {
+    return Board.getJSON(value);
   }
 
-  setBackground(data) {
-    if(typeof data === 'object') {
-      return JSON.stringify(data);
+  setMeta(value) {
+    return Board.setJSON(value);
+  }
+
+  pages() {
+    return this.hasMany('App/Models/Page');
+  }
+
+  groups() {
+    return this.hasMany('App/Models/Group');
+  }
+
+  tiles() {
+    return this.hasMany('App/Models/Tile');
+  }
+
+  toJSON() {
+    let data = super.toJSON();
+
+    if(data.__meta__) {
+      data = {
+        ...data,
+        ...data.__meta__
+      }
+
+      delete data.__meta__;
     }
 
     return data;
@@ -65,4 +72,4 @@ class Board extends Model {
 
 }
 
-module.exports = Board
+module.exports = Board;

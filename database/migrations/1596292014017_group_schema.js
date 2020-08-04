@@ -9,6 +9,7 @@ class GroupSchema extends Schema {
       table.uuid("id").primary();
 
       table.uuid('page_id').references('id').inTable('pages');
+      table.uuid('board_id').references('id').inTable('boards');
 
       table.integer('order').defaultTo(999);
       table.string('name').nullable();

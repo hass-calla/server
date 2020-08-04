@@ -1,38 +1,25 @@
-'use strict'
+'use strict';
 
 class JsonCast {
-  constructor() {
-    this.columns = [];
-  }
-
-  register (Model) {
-    this.columns = Model.jsonColumns;
-
-    Model.addHook('beforeSave', this.stringify.bind(this));
-    Model.addHook('afterSave', this.parse.bind(this));
-    Model.addHook('afterFetch', this.parse.bind(this));
-  }
-
-  parse(modelInstance) {
-    for(let column of this.columns) {
-      const data = modelInstance[column];
-
-      if(typeof data === 'string') {
-        modelInstance[column] = JSON.parse(data);
+  register(Model) {
+    Model.getJSON = function(value) {
+      if(typeof value === 'string') {
+        return JSON.parse(value);
       }
-    }
-  }
 
-  stringify(modelInstance) {
-    for(let column of this.columns) {
-      const data = modelInstance[column];
+      return value;
+    };
 
-      if(typeof data === 'object') {
-        modelInstance[column] = JSON.stringify(data);
+    Model.setJSON = function(value) {
+      if(typeof value === 'object') {
+        return JSON.stringify(value);
       }
-    }
+
+      return value;
+    };
+
   }
 
 }
 
-module.exports = JsonCast
+module.exports = JsonCast;

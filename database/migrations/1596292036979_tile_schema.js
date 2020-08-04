@@ -9,6 +9,7 @@ class TileSchema extends Schema {
       table.uuid('id').primary();
 
       table.uuid('group_id').references('id').inTable('groups');
+      table.uuid('board_id').references('id').inTable('boards');
 
       table.integer('order').defaultTo(999);
       table.string('name').nullable();
@@ -18,6 +19,7 @@ class TileSchema extends Schema {
 
       table.json('entity_id').nullable();
       table.json('state_style').nullable();
+      table.json('conditional_style').nullable();
       table.json('meta').nullable();
 
       table.timestamps();

@@ -7,6 +7,7 @@ class Page extends Model {
 
   static boot() {
     super.boot();
+    Page.addTrait('JsonCast');
     Page.addHook('beforeCreate', 'UuidHook.uuid');
   }
 
@@ -16,6 +17,22 @@ class Page extends Model {
 
   static get incrementing() {
     return false;
+  }
+
+  getBackground(value) {
+    return Page.getJSON(value);
+  }
+
+  setBackground(value) {
+    return Page.setJSON(value);
+  }
+
+  getMeta(value) {
+    return Page.getJSON(value);
+  }
+
+  setMeta(value) {
+    return Page.setJSON(value);
   }
 
   board () {
