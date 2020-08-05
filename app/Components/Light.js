@@ -17,14 +17,14 @@ class Light extends Component {
       {
         state: 'on',
         icon: 'lightbulb',
-        color: '',
-        background: ''
+        color: '#ffffff',
+        background: '#15BD72A2'
       },
       {
         state: 'off',
         icon: 'lightbulb-outline',
-        color: '',
-        background: ''
+        color: '#ffffff',
+        background: '#BD1549A2'
       }
     ]
   }

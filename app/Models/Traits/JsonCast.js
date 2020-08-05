@@ -3,7 +3,7 @@
 class JsonCast {
   register(Model) {
     Model.getJSON = function(value) {
-      if(typeof value === 'string') {
+      if(value && typeof value === 'string') {
         return JSON.parse(value);
       }
 

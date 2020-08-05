@@ -51,6 +51,10 @@ class Tile extends Model {
     return Tile.setJSON(value);
   }
 
+  getSyncFriendlyName(value) {
+    return value === 1;
+  }
+
   group () {
     return this.belongsTo('App/Models/Group')
   }

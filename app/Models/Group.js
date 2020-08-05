@@ -27,6 +27,10 @@ class Group extends Model {
     return Group.setJSON(value);
   }
 
+  getNameVisible(value) {
+    return value === 1;
+  }
+
   tiles () {
     return this.hasMany('App/Models/Tile')
   }

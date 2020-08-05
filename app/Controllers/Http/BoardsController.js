@@ -3,7 +3,7 @@ const components = require('../../Components');
 
 const Board = use('App/Models/Board');
 
-class ComponentsController {
+class BoardsController {
 
   async all() {
     return (await Board.query()
@@ -13,7 +13,7 @@ class ComponentsController {
                        .fetch()).rows.map(b => b.toJSON());
   }
 
-  async create() {
+  async create({request}) {
     const board = new Board;
 
     board.name = "New Board";
@@ -28,7 +28,9 @@ class ComponentsController {
       images: [],
       autoplayDuration: 3000
     };
-    board.save();
+
+    await board.save();
+    await board.reload();
 
     return board.toObject();
   }
@@ -40,11 +42,12 @@ class ComponentsController {
     board.background = request.input('background');
     board.fully = request.input('fully');
     board.meta = request.input('meta');
-    board.save();
+
+    await board.save();
 
     return board.toObject();
   }
 
 }
 
-module.exports = ComponentsController;
+module.exports = BoardsController;

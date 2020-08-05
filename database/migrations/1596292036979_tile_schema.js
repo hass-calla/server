@@ -13,6 +13,7 @@ class TileSchema extends Schema {
 
       table.integer('order').defaultTo(999);
       table.string('name').nullable();
+      table.boolean('sync_friendly_name').defaultTo(1);
       table.string('type').nullable();
       table.integer('width').defaultTo(1);
       table.integer('height').defaultTo(1);

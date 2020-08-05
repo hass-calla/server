@@ -8,6 +8,10 @@ class Component {
     this.minHeight = minHeight;
   }
 
+  get syncFriendlyName() {
+    return true;
+  }
+
   supportingMultipleEntities() {
     return true;
   }
@@ -20,19 +24,23 @@ class Component {
     return []
   }
 
+  conditionalStyle() {
+    return []
+  }
+
   meta() {
     return {}
   }
 
   form() {
     return {
-      id: "",
       type: this.name,
-      name: "",
       width: this.minWidth,
       height: this.minHeight,
-      stateStyle: this.stateStyle(),
-      entityId: this.supportingMultipleEntities() ? [] : "",
+      sync_friendly_name: this.syncFriendlyName,
+      state_style: this.stateStyle(),
+      conditional_style: this.conditionalStyle(),
+      entity_id: this.supportingMultipleEntities() ? [] : "",
       meta: this.meta()
     }
   }
